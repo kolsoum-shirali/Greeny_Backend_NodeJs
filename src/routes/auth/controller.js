@@ -1,10 +1,12 @@
 const controller = require("../controller");
 const _ = require("lodash");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 // یه کلاس داریم موقع اکسپورت گرفتن ازش یه نمونه یا همون ابجکت میسازیم
 module.exports = new (class extends controller {
   async register(req, res) {
-    console.log('Yes')
+    console.log("Yes");
     let user = this.UserModel.findOne({ email: req.body.email });
     if (user) {
       return this.response({
@@ -22,13 +24,35 @@ module.exports = new (class extends controller {
     // convert pass to hash by bcrypt package
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
-    await user.save()
+    await user.save();
     this.response({
-      res,message:"the user successfuly registered",
-      data:_.pick(user, ["_id","name","email"])
-    })
+      res,
+      message: "the user successfuly registered",
+      data: _.pick(user, ["_id", "name", "email"]),
+    });
   }
   async login(req, res) {
-    res.send("login");
+    const user = await this.UserModel.findOne({ email: req.body.email });
+    if (!user) {
+      return this.response({
+        res,
+        code: 400,
+        message: "Invalid Email or Password",
+      });
+    }
+    const isValid = await bcrypt.compare(req.body.password, user.password);
+    if (!isValid) {
+      return this.response({
+        res,
+        code: 400,
+        message: "Invalid Email or Password",
+      });
+    }
+    const token = jwt.sign({ _id: user.id }, config.get("jwt_key"));
+    this.response({
+      res,
+      message: "successfuly logged in",
+      data: { token },
+    });
   }
 })();
