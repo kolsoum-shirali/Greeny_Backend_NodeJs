@@ -32,8 +32,6 @@ module.exports = new (class extends controller {
     });
   }
   async login(req, res) {
-    // تست هست برای اینکه ارورها داخل فایل مجزا ذخیره بشن
-    // throw new Error('login failed')
     const user = await this.UserModel.findOne({ email: req.body.email });
     if (!user) {
       return this.response({

@@ -6,7 +6,6 @@ const router = require("./src/routes/index");
 require("./startup/config")(app, express);
 // یه فانکشن برمیگردونه پس باید کال بشه
 require("./startup/db")();
-require("./startup/logging")();
 // هر درخواستی که سمت سرور بیاد و اولش آرگومان اولی زیر باشد
 // به فایل روترمون هدایت می شویم
 app.use("/api", router);
