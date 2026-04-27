@@ -6,29 +6,27 @@ module.exports = class {
     autoBind(this);
     this.UserModel = UserModel;
   }
-  validationBody(req, res) {
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-      // تبدیل به ارایه
-      const errors = result.array();
-      const messages = [];
-      errors.forEach((err) => messages.push(err.msg));
-      res.status(400).json({
-        message: "validation error",
-        data: messages,
-      });
-      return false;
-    }
-    return true;
+validationBody(req, res) {
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    const errors = result.array();
+    const messages = errors.map(err => err.msg);
+
+    res.status(400).json({
+      message: "validation error",
+      data: messages,
+    });
+    return false; // indicates error
   }
-  validate(req, res, next) {
-    if (this.validationBody(req, res)) {
-      return;
-    }
-    // اگر ارور نباشه نکس اجرا میشه
-    next();
-  }
-  response({ res, message, code = 200, data = {} }) {
+  return true;
+}
+
+validate(req, res, next) {
+  const isValid = this.validationBody(req, res);
+  if (!isValid) return; // stop if not valid
+
+  next();
+}  response({ res, message, code = 200, data = {} }) {
     res.status(code).json({
       message,
       data,
