@@ -1,4 +1,4 @@
-const controller = require("./../controller");
+const controller = require("../controller");
 const _ = require("lodash");
 const config = require("config");
 const jwt = require("jsonwebtoken");

@@ -1,7 +1,7 @@
 {
-  "name": "auth project",
+  "name": "Greeny project",
   "db": {
-    "address": "mongodb://localhost:27017/authProject"
+    "address": "mongodb://localhost:27017/GreenyApp"
   },
   "jwt_key" : "jghhhhhhhhhhhhhdddddddrrrrrrsffff555dfh"
 }
