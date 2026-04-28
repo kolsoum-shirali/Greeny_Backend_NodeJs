@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-
+const cors = require("cors"); // Import cors
+app.use(cors());
 
 const router = require("./src/routes/index");
 require("./startup/config")(app, express);
@@ -10,5 +11,5 @@ require("./startup/db")();
 // به فایل روترمون هدایت می شویم
 app.use("/api", router);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`listening on port ${port}`));
