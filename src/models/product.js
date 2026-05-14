@@ -2,20 +2,19 @@ const mongoose = require("mongoose");
 const timestamp = require("mongoose-timestamp");
 // ایجاد اسکیما
 const productSchema = new mongoose.Schema({
-  name: {
+  img: {
     type: String,
     required: true,
   },
-  desc: {
+  title: {
     type: String,
     required: true,
   },
-  id: {
+  oldPrice: {
     type: Number,
-    required: true,
   },
-  img_pro: {
-    type: String,
+  newPrice: {
+    type: Number,
   },
 });
 
