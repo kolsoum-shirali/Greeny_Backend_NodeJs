@@ -4,7 +4,12 @@ const authRouter = require("./auth/index");
 const userRouter = require("./user/index");
 const adminRouter = require("./admin/index");
 const productsRouter = require("./products/index");
+const blogsRouter = require("./blogs/index");
+const path = require("path");
+const app = express();
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
 
 const { isLogedIn, isAdmin } = require("../middlewares/auth");
 //  اول درخواست اگر ارگومان اولی باشه به ارگومان دومی هدایت می شویم
@@ -16,5 +21,6 @@ router.use("/user", isLogedIn, userRouter);
 // اول میدلور اولی اجرا میشه بعد دومی و ...
 router.use("/admin", isLogedIn, isAdmin, adminRouter);
 router.use("/", productsRouter);
+router.use("/", blogsRouter);
 
 module.exports = router;
