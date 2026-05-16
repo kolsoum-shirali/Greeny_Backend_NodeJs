@@ -5,6 +5,8 @@ const userRouter = require("./user/index");
 const adminRouter = require("./admin/index");
 const productsRouter = require("./products/index");
 const blogsRouter = require("./blogs/index");
+const commentsRouter = require("./comments/index");
+
 const path = require("path");
 const app = express();
 
@@ -22,5 +24,6 @@ router.use("/user", isLogedIn, userRouter);
 router.use("/admin", isLogedIn, isAdmin, adminRouter);
 router.use("/", productsRouter);
 router.use("/", blogsRouter);
+router.use("/", commentsRouter);
 
 module.exports = router;
