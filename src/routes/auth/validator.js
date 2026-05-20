@@ -8,7 +8,7 @@ module.exports = new (class {
 
       check("name").notEmpty().withMessage("نام نباید خالی باشد"),
 
-      check("password").notEmpty().withMessage("Password can't be empty"),
+      check("password").notEmpty().withMessage("پسورد نباید خالی باشد"),
     ];
   }
   loginValidator() {
