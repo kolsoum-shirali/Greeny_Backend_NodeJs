@@ -1,39 +1,23 @@
 const controller = require("../controller");
-const _ = require("lodash");
 module.exports = new (class extends controller {
   async registerOrder(req, res) {
-    console.log(req.body, "re");
     try {
       // Create a new order instance
-      order = new this.OrderModel(
-        _.pick(req.body, [
-          "name",
-          "lastName",
-          "mobile",
-          "address",
-          "email",
-          "products",
-        ]),
+      let order = new this.OrderModel(
+       req.body
       );
       await order.save();
       this.response({
         res,
-        message: "سفارش با موفقیت ثبت شد",
-        data: _.pick(order, [
-          "_id",
-          "name",
-          "lastName",
-          "mobile",
-          "address",
-          "email",
-          "products",
-        ]),
+        message: "سفارش شما با موفقیت ثبت شد",
+        data: order,
       });
     } catch (err) {
+      console.error("error:", err);
       this.response({
         res: res,
         code: 500,
-        message: "An internal server error occurred during registration.",
+        message: "An internal server error occurred.",
       });
     }
   }
