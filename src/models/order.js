@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
   products: {
-    type: Object,
+    type: Array,
     required: true,
   },
 });
