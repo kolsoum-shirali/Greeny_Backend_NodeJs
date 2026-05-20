@@ -1,7 +1,7 @@
 const autoBind = require("auto-bind");
 const { validationResult } = require("express-validator");
 const UserModel = require("../models/user");
-const OrderModel = require("../models/order");
+const OrderModel = require("../models/order")
 
 module.exports = class {
   constructor() {
