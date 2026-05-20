@@ -14,7 +14,7 @@ module.exports = new (class extends controller {
         return this.response({
           res: res,
           code: 400,
-          message: "This user already registered",
+          message: "این کاربر قبلا ثبت نام کرده",
         });
       }
 
@@ -33,7 +33,7 @@ module.exports = new (class extends controller {
       // Send a success response
       this.response({
         res,
-        message: "The user successfully registered",
+        message: "کاربر با موفقیت ثبت نام شد",
         data: _.pick(user, ["_id", "name", "email"]),
       });
     } catch (err) {
@@ -55,7 +55,7 @@ module.exports = new (class extends controller {
         return this.response({
           res,
           code: 400,
-          message: "Invalid Email or Password",
+          message: "ایمیل یا پسورد نامعتبر",
         });
       }
       const isValid = await bcrypt.compare(req.body.password, user.password);
@@ -63,13 +63,13 @@ module.exports = new (class extends controller {
         return this.response({
           res,
           code: 400,
-          message: "Invalid Email or Password",
+          message: "ایمیل یا پسورد نامعتبر",
         });
       }
       const token = jwt.sign({ _id: user.id }, config.get("jwt_key"));
       this.response({
         res,
-        message: "successfuly logged in",
+        message: "با موفقیت وارد شدید",
         data: { token },
       });
     } catch (err) {
