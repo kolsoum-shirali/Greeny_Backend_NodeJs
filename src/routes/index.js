@@ -7,6 +7,7 @@ const productsRouter = require("./products/index");
 const blogsRouter = require("./blogs/index");
 const commentsRouter = require("./comments/index");
 const orderRouter = require("./order/index");
+const adsRouter = require("./ads/index");
 
 const path = require("path");
 const app = express();
@@ -27,5 +28,6 @@ router.use("/", productsRouter);
 router.use("/", blogsRouter);
 router.use("/", commentsRouter);
 router.use("/", orderRouter);
+router.use("/", adsRouter);
 
 module.exports = router;
