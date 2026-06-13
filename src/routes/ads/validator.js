@@ -8,6 +8,7 @@ module.exports = new (class {
       check("minPrice").notEmpty().withMessage("کمترین قیمت نباید خالی باشد"),
       check("maxPrice").notEmpty().withMessage("بیشترین قیمت نباید خالی باشد"),
       check("type").notEmpty().withMessage("نوع آگهی نباید خالی باشد"),
+      check("pageType").notEmpty().withMessage("نوع صفحه نباید خالی باشد"),
       // Custom validator to check for the file
       body("image").custom((value, { req }) => {
         if (!req.file) {

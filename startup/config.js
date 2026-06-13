@@ -4,4 +4,5 @@ module.exports = function (app, express) {
   app.use(express.urlencoded({ extended: true }));
   // فایل ها استاتیک توی پوشه پابلیک
   app.use(express.static("public"));
+  app.use("/uploads", express.static("uploads"));
 };

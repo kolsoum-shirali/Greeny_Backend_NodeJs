@@ -26,6 +26,10 @@ const adsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+   pageType: {
+    type: Number,
+    required: true,
+  },
 });
 
 adsSchema.plugin(timestamp);
