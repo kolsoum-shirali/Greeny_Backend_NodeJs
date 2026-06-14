@@ -8,5 +8,5 @@ router.post(
   controller.validate,
   controller.registerOrder,
 );
-
+router.get("/allOrders", controller.allOrders);
 module.exports = router;
