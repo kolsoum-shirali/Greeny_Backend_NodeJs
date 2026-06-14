@@ -22,11 +22,15 @@ const adsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  mobile: {
+    type: Number,
+    required: true,
+  },
   type: {
     type: Number,
     required: true,
   },
-   pageType: {
+  pageType: {
     type: Number,
     required: true,
   },

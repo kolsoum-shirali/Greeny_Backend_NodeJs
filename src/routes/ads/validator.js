@@ -7,6 +7,7 @@ module.exports = new (class {
       check("description").notEmpty().withMessage("توضیحات نباید خالی باشد"),
       check("minPrice").notEmpty().withMessage("کمترین قیمت نباید خالی باشد"),
       check("maxPrice").notEmpty().withMessage("بیشترین قیمت نباید خالی باشد"),
+      check("mobile").notEmpty().withMessage(" شماره موبایل نباید خالی باشد"),
       check("type").notEmpty().withMessage("نوع آگهی نباید خالی باشد"),
       check("pageType").notEmpty().withMessage("نوع صفحه نباید خالی باشد"),
       // Custom validator to check for the file
