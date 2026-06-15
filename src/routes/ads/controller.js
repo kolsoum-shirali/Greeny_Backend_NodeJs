@@ -31,11 +31,28 @@ module.exports = new (class extends controller {
       });
     }
   }
-  async allAds(req, res) {
+  async relatedAds(req, res) {
     try {
       const { type } = req.params;
-      console.log(req.params, "reqq");
-      const allAds = await Ads.find({ pageType: type });
+      const relatedAds = await Ads.find({ pageType: type });
+      return this.response({
+        res: res,
+        code: 200,
+        message: "relatedAds fetched successfully",
+        data: relatedAds,
+      });
+    } catch (err) {
+      console.error("Error fetching relatedAds:", err);
+      this.response({
+        res: res,
+        code: 500,
+        message: "Failed to fetch relatedAds",
+      });
+    }
+  }
+  async allAds(req, res) {
+    try {
+      const allAds = await Ads.find({});
       return this.response({
         res: res,
         code: 200,

@@ -16,6 +16,7 @@ router.post(
     (controller.validate, controller.createAds(req, res));
   },
 );
-router.get("/ads/:type", controller.allAds);
+router.get("/ads/:type", controller.relatedAds);
+router.get("/ads", controller.allAds)
 
 module.exports = router;
