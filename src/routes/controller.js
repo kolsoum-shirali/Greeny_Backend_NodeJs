@@ -5,6 +5,7 @@ const OrderModel = require("../models/order");
 const AdsModel = require("../models/ads");
 const ProductModel = require("../models/product");
 const BlogModel = require("../models/blog");
+const CommentModel = require("../models/comment");
 
 module.exports = class {
   constructor() {
@@ -14,6 +15,7 @@ module.exports = class {
     this.AdsModel = AdsModel;
     this.ProductModel = ProductModel;
     this.BlogModel = BlogModel;
+    this.CommentModel = CommentModel;
   }
   validationBody(req, res) {
     const result = validationResult(req);
