@@ -1,37 +1,61 @@
 const controller = require("../controller");
-const blogsData = require("../../../public/data/blogs");
+const Blog = require("../../models/blog");
+
 // یه کلاس داریم موقع اکسپورت گرفتن ازش یه نمونه یا همون ابجکت میسازیم
 module.exports = new (class extends controller {
-  async blogs(req, res) {
+  async createBlog(req, res) {
     try {
-      return this.response({
-        res: res,
-        code: 200,
-        message: "blogs fetched successfully. (:",
-        data: blogsData,
+      const blogData = {
+        ...req.body,
+        image: req.file ? req.file.path : null, // Save the path to your DB
+      };
+
+      let blog = new this.BlogModel(blogData);
+      await blog.save();
+
+      this.response({
+        res,
+        message: "وبلاگ شما با موفقیت ثبت شد",
+        data: blog,
       });
     } catch (err) {
+      console.error("error:", err);
       this.response({
         res: res,
         code: 500,
-        message: "Failed to fetch blogs :(",
+        message: "An internal server error occurred.",
       });
     }
   }
-
+  async allBlogs(req, res) {
+    try {
+      const allBlogs = await Blog.find({});
+      return this.response({
+        res: res,
+        code: 200,
+        message: "allBlogs fetched successfully",
+        data: allBlogs,
+      });
+    } catch (err) {
+      console.error("Error fetching allBlogs:", err);
+      this.response({
+        res: res,
+        code: 500,
+        message: "Failed to fetch allBlogs",
+      });
+    }
+  }
   async singleBlog(req, res) {
     try {
-      const id = parseInt(req.params.id);
-      const blog = blogsData.find((item) => item.id === id);
-
+      const { num } = req.params;
+      const blog = await Blog.findOne({ numBlog: parseInt(num) });
       if (!blog) {
         return this.response({
           res,
           code: 404,
-          message: "Blog not found",
+          message: "Single blog not found :(",
         });
       }
-
       return this.response({
         res,
         code: 200,
@@ -42,7 +66,7 @@ module.exports = new (class extends controller {
       return this.response({
         res,
         code: 500,
-        message: "Failed to fetch the blog :(",
+        message: "Failed to fetch Single blog :(",
       });
     }
   }

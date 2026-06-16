@@ -4,6 +4,8 @@ const UserModel = require("../models/user");
 const OrderModel = require("../models/order");
 const AdsModel = require("../models/ads");
 const ProductModel = require("../models/product");
+const BlogModel = require("../models/blog");
+
 module.exports = class {
   constructor() {
     autoBind(this);
@@ -11,6 +13,7 @@ module.exports = class {
     this.OrderModel = OrderModel;
     this.AdsModel = AdsModel;
     this.ProductModel = ProductModel;
+    this.BlogModel = BlogModel;
   }
   validationBody(req, res) {
     const result = validationResult(req);
